@@ -1,5 +1,4 @@
-import {IUser} from "../IUser";
-interface User{
+export interface User{
     id: number,
     email: string,
     role: string,

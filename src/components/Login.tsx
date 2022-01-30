@@ -1,26 +1,23 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import {useInput} from "../hooks/useInput";
-import {useFetching} from "../hooks/useFetching";
-import axios from "axios";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
+import Header from "./Header";
 
 const Login:FC = () => {
     const password = useInput('')
     const email = useInput('')
-    const [login, isLoading, error] = useFetching(async () => {
-        await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/login/login`, {
-            email: email.value,
-            password: password.value
-        })
-    })
-    if (isLoading) return <div>Загрузка</div>
+    const {login}=useContext(Context)
+
+    if (login.loading) return <div>Загрузка</div>
     return (
-        <div>
+        <Header>
             <input {...email} placeholder='email' type='email'/>
             <input {...password} placeholder='password' type='password'/>
-            <button onClick={() => login()}>Войти</button>
-            {error && <div>{error}</div>}
-        </div>
+            <button onClick={() => login.login(email.value, password.value)}>Войти</button>
+            {login.error && <div>{login.error}</div>}
+        </Header>
     );
 };
 
-export default Login;
+export default observer(Login);
