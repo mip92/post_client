@@ -49,7 +49,7 @@ const Header: FC = ({children}) => {
 
     useEffect(()=>{
         if (login.isAuth)  setPage([
-            {text:'Posts', url:'/posts'},
+            {text:'My Posts', url:`/posts/${login.user.id}`},
             {text:'Users', url:'/users'}])
         else  setPage([
             {text:'Registration', url:'/registration'},

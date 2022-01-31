@@ -3,24 +3,24 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Login from "./store/login";
 import Users from "./store/users";
-import NewPost from "./store/newPost";
+import Posts from "./store/posts";
 
 interface ISrore {
     login: Login,
     users: Users,
-    newPost: NewPost
+    posts:Posts
 }
 const login = new Login()
 const users =new Users()
-const newPost = new NewPost()
+const posts = new Posts()
 export const Context = createContext<ISrore>({
     login,
     users,
-    newPost
+    posts
 })
 ReactDOM.render(
   <React.StrictMode>
-      <Context.Provider value={{login, users, newPost}}>
+      <Context.Provider value={{login, users, posts}}>
           <App />
       </Context.Provider>
   </React.StrictMode>,

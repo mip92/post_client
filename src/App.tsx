@@ -6,6 +6,7 @@ import {Context} from "./index";
 import {observer} from "mobx-react-lite";
 import Users from "./components/Users";
 import CreatePost from "./components/CreatePost";
+import Posts from "./components/Posts";
 
 function App() {
     const {login} = useContext(Context)
@@ -20,7 +21,7 @@ function App() {
         {exact: true, path: "/registration", component: <Registration/>},
         {exact: false, path: "/login", component: <Login/>},
         {exact: false, path: "/users", component: <Users/>},
-        {exact: false, path: "/createPost", component: <CreatePost/>}
+        {exact: false, path: "/posts/:userId", component: <Posts/>},
     ]
     useEffect(() => {
        if(localStorage.getItem('token')) login.checkAuth()
